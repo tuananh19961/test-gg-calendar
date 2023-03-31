@@ -2,7 +2,8 @@ export const Config = {
   tokenPrefix: import.meta.env.VITE_GG_CALENDAR_TOKEN_KEY,
   clientId: import.meta.env.VITE_GG_CALENDAR_CLIENT_ID,
   calendarId: import.meta.env.VITE_GG_CALENDAR_ID,
-  scopes: "email profile https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events"
+  scopes: "email profile https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events",
+  maxRetries: 3
 }
 
 export const mockEvent = {

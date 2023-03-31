@@ -10,6 +10,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
 /** Variables */
 const isLogined = ref(Cookie.hasToken());
+const retries = ref(0);
 
 /**
  * Authenticate with Gmail
@@ -24,6 +25,7 @@ const authenticateGoogle = () => new Promise((resolve, reject) => {
         if (response.access_token) {
           Cookie.setToken(response.access_token);
           isLogined.value = true;
+
           resolve(response);
         } else {
           reject(response);
@@ -52,16 +54,19 @@ const pushEvent = (event) => {
       window.alert(`Event [${res.data.id}] is created.`);
     })
     .catch(err => {
+
       const code = err.response?.data?.error?.code || 500;
       const message = err.response?.data?.error?.message || err.message;
 
       // Log message
       console.error(`[ERR-${code}]: ${message}`);
-      window.alert(message);
 
       // Clear token
       isLogined.value = false;
       Cookie.clearToken();
+
+      // Retry
+      onAddEvent();
     });
 }
 
@@ -71,6 +76,9 @@ const pushEvent = (event) => {
  * If not logined: Re-login and add event to GG calendar
  */
 const onAddEvent = () => {
+  // Skip if retry many times
+  if (retries.value > Config.maxRetries) return false;
+
   // GG Authenticate and push Event
   if (!isLogined.value) {
     authenticateGoogle()
