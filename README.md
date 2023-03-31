@@ -1,29 +1,37 @@
 # test-gg-calendar
 
-This template should help get you started developing with Vue 3 in Vite.
+Project to login with gg account and add event to GG calendar
 
-## Recommended IDE Setup
+## Recommended Documents
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+* https://developers.google.com/identity/oauth2/web/guides/migration-to-gis
+* https://github.com/yobaji/vue3-google-login
+* https://developers.google.com/calendar/api/v3/reference?hl=vi
 
 ## Project Setup
 
 ```sh
-npm install
+yarn install
 ```
 
-### Compile and Hot-Reload for Development
+### Create .env file with content
+
+```
+VITE_GG_CALENDAR_CLIENT_ID=[GG client ID]
+VITE_GG_CALENDAR_TOKEN_KEY="gg-calendar-access-token"
+VITE_GG_CALENDAR_ID=[email of calendar]
+```
+
+## Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+yarn dev --port=3000
 ```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+## Notes
+* When create "OAuth 2.0 Client IDs" in Google Cloud Console,
+    * Config "Authorized JavaScript origins" with 2 domains to dev in local:
+        ```
+        http://localhost:3000
+        http://localhost
+        ```
