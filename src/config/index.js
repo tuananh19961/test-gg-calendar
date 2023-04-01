@@ -2,8 +2,19 @@ export const Config = {
   tokenPrefix: import.meta.env.VITE_GG_CALENDAR_TOKEN_KEY,
   clientId: import.meta.env.VITE_GG_CALENDAR_CLIENT_ID,
   calendarId: import.meta.env.VITE_GG_CALENDAR_ID,
-  scopes: "email profile https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events",
+  scopes: "email profile openid https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events",
   maxRetries: 3
+}
+
+export const MSconfig = {
+  auth: {
+    clientId: import.meta.env.VITE_MSTEAM_CLIENT_ID,
+    authority: `https://login.microsoftonline.com/${import.meta.env.VITE_MSTEAM_TENANT_ID}`,
+    redirectUri: 'http://localhost:3000/'
+  },
+  cache: {
+    cacheLocation: 'localStorage',
+  },
 }
 
 export const mockEvent = {
@@ -29,4 +40,34 @@ export const mockEvent = {
       { 'method': 'popup', 'minutes': 10 }
     ]
   }
+}
+
+export const mockMsTeamEvent = {
+  "subject": "Let's go for lunch",
+  "body": {
+    "contentType": "HTML",
+    "content": "Does noon work for you?"
+  },
+  "start": {
+    "dateTime": "2017-04-15T12:00:00",
+    "timeZone": "Pacific Standard Time"
+  },
+  "end": {
+    "dateTime": "2017-04-15T14:00:00",
+    "timeZone": "Pacific Standard Time"
+  },
+  "location": {
+    "displayName": "Harry's Bar"
+  },
+  "attendees": [
+    {
+      "emailAddress": {
+        "address": "samanthab@contoso.onmicrosoft.com",
+        "name": "Samantha Booth"
+      },
+      "type": "required"
+    }
+  ],
+  "allowNewTimeProposals": true,
+  "transactionId": "7E163156-7762-4BEB-A1C6-729EA81755A7"
 }

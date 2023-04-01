@@ -22,6 +22,7 @@ const authenticateGoogle = () => new Promise((resolve, reject) => {
       client_id: Config.clientId,
       scope: Config.scopes,
       callback: (response) => {
+        console.log(response);
         if (response.access_token) {
           Cookie.setToken(response.access_token);
           isLogined.value = true;
@@ -98,7 +99,7 @@ const onAddEvent = () => {
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld msg="GG CALENDAR" />
 
       <button class="btn btn-primary" @click.prevent="onAddEvent">
         Add event to GG
